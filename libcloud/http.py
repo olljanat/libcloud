@@ -42,9 +42,8 @@ ALLOW_REDIRECTS = 1
 # Default timeout for HTTP requests in seconds
 DEFAULT_REQUEST_TIMEOUT = 60
 
-HTTP_PROXY_ENV_VARIABLE_NAME = "http_proxy"
-HTTPS_PROXY_ENV_VARIABLE_NAME = "https_proxy"
-
+HTTP_PROXY_ENV_VARIABLE_NAME = "LIBCLOUD_PROXY"
+HTTPS_PROXY_ENV_VARIABLE_NAME = "LIBCLOUD_PROXY"
 
 class SignedHTTPSAdapter(HTTPAdapter):
     def __init__(self, cert_file, key_file):
@@ -154,7 +153,7 @@ class LibcloudBaseConnection:
         return (proxy_scheme, proxy_host, proxy_port, proxy_username, proxy_password)
 
     def _setup_verify(self):
-        self.verify = libcloud.security.VERIFY_SSL_CERT
+        self.verify = False
 
     def _setup_ca_cert(self, **kwargs):
         # simulating keyword-only argument in Python 2
