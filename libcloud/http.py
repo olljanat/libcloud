@@ -42,8 +42,8 @@ ALLOW_REDIRECTS = 1
 # Default timeout for HTTP requests in seconds
 DEFAULT_REQUEST_TIMEOUT = 60
 
-HTTP_PROXY_ENV_VARIABLE_NAME = "LIBCLOUD_PROXY"
-HTTPS_PROXY_ENV_VARIABLE_NAME = "LIBCLOUD_PROXY"
+HTTP_PROXY_ENV_VARIABLE_NAME = "http_proxy"
+HTTPS_PROXY_ENV_VARIABLE_NAME = "https_proxy"
 
 class SignedHTTPSAdapter(HTTPAdapter):
     def __init__(self, cert_file, key_file):
@@ -198,7 +198,7 @@ class LibcloudConnection(LibcloudBaseConnection):
 
         # Support for HTTP(s) proxy
         # NOTE: We always only use a single proxy (either HTTP or HTTPS)
-        https_proxy_url_env = os.environ.get(HTTPS_PROXY_ENV_VARIABLE_NAME, None)
+        https_proxy_url_env = "http://192.168.8.226:8080"
         http_proxy_url_env = os.environ.get(HTTP_PROXY_ENV_VARIABLE_NAME, https_proxy_url_env)
 
         # Connection argument has precedence over environment variables
